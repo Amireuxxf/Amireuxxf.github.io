@@ -18,7 +18,7 @@ highlight_theme: mac light #  darker / pale night / light / ocean / mac / mac li
 highlight_copy: true # copy button
 highlight_lang: true # show the code language
 highlight_shrink: false # true: shrink the code blocks / false: expand the code blocks | none: expand code blocks and hide the button
-highlight_height_limit: 75 # unit: px
+highlight_height_limit: 100 # unit: px
 code_word_wrap: false
 
 # copy settings
@@ -34,7 +34,7 @@ copy:
 #   icon: link || the description
 social:
  fab fa-github: https://github.com/Amireuxxf || Github
- fas fa-envelope: mailto:xxxxxx@gmail.com || Email
+ fas fa-envelope: mailto:amireuxxf@gmail.com || Email
 
 # search (搜索)
 # see https://butterfly.js.org/posts/ceeb73f/#搜索系統
@@ -88,28 +88,28 @@ disable_top_img: false
 index_img: "./img/5.png"
 
 # If the banner of page not setting, it will show the top_img
-default_top_img: https://pixabay.com/zh/photos/animal-cat-pet-feline-mammal-6947514/
+default_top_img: "https://cdn.pixabay.com/photo/2022/07/10/19/28/mountains-7313638_960_720.jpg"
 
 # The banner image of archive page
-archive_img: https://pixabay.com/zh/photos/animal-cat-pet-feline-mammal-6947514/
+archive_img: "https://cdn.pixabay.com/photo/2022/07/10/19/28/mountains-7313638_960_720.jpg"
 
 # If the banner of tag page not setting, it will show the top_img
 # note: tag page, not tags page (子標籤頁面的 top_img)
-tag_img:
+tag_img: "https://cdn.pixabay.com/photo/2022/07/10/19/28/mountains-7313638_960_720.jpg"
 
 # The banner image of tag page
 # format:
 #  - tag name: xxxxx
-tag_per_img:
+tag_per_img: "https://cdn.pixabay.com/photo/2022/07/10/19/28/mountains-7313638_960_720.jpg"
 
 # If the banner of category page not setting, it will show the top_img
 # note: category page, not categories page (子分類頁面的 top_img)
-category_img:
+category_img: "https://cdn.pixabay.com/photo/2022/07/10/19/28/mountains-7313638_960_720.jpg"
 
 # The banner image of category page
 # format:
 #  - category name: xxxxx
-category_per_img:
+category_per_img: "https://cdn.pixabay.com/photo/2022/07/10/19/28/mountains-7313638_960_720.jpg"
 
 cover:
   # display the cover or not (是否顯示文章封面)
@@ -121,7 +121,7 @@ cover:
   position: both
   # When cover is not set, the default cover is displayed (當沒有設置cover時，默認的封面顯示)
   default_cover:
-   - https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg
+   - "./img/5.png"
 
 # Replace Broken Images (替換無法顯示的圖片)
 error_img:
@@ -513,7 +513,7 @@ tag_ui: # 留空或 index
 # Website Background (設置網站背景)
 # can set it to color or image (可設置圖片 或者 顔色)
 # The formal of image: url(http://xxxxxx.com/xxx.jpg)
-background: url(./img/5.png)
+background: 'url(/img/5.png)'
 
 # Footer Background
 footer_bg: false
@@ -716,7 +716,7 @@ newest_comments:
 
 # Conversion between Traditional and Simplified Chinese (簡繁轉換)
 translate:
-  enable: false
+  enable: true
   # The text of a button
   default: 繁
   # the language of website (1 - Traditional Chinese/ 2 - Simplified Chinese）
@@ -856,7 +856,7 @@ css_prefix: true
 # 插入代码到头部 </head> 之前 和 底部 </body> 之前
 inject:
   head:
-   - <link rel="stylesheet" href="/style.css">
+   - <link rel="stylesheet" href="./css/style.css">
   bottom:
   # - <script src="xxxx"></script>
 
