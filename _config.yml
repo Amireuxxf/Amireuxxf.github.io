@@ -3,7 +3,7 @@
 ## Source: https://github.com/hexojs/hexo/
 
 # Site
-title: 赵小航的博客
+title: 赵小航的个人博客
 subtitle: ''
 description: '可预测性不是事物的走向，而是它们的可能趋势。——拉海尔•法鲁克'
 keywords: 博客
@@ -14,7 +14,10 @@ timezone: ''
 # URL
 ## Set your site url here. For example, if you use GitHub Page, set url as 'https://username.github.io/project'
 url: https://Amireuxxf.github.io
-permalink: :year/:month/:day/:title/
+permalink: archives/:abbrlink.html
+abbrlink:
+  alg: crc32  # 算法：crc16(default) and crc32
+  rep: hex    # 进制：dec(default) and hex
 permalink_defaults:
 pretty_urls:
   trailing_index: true # Set to false to remove trailing 'index.html' from permalinks
@@ -102,6 +105,31 @@ theme: butterfly
 # Deployment
 ## Docs: https://hexo.io/docs/one-command-deployment
 deploy:
-  type: 'git'
-  repo: 'https://github.com/Amireuxxf/Amireuxxf.github.io.git'
-  branch: main
+  - type: 'git'
+    repo: 'https://Amireuxxf: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@github.com/Amireuxxf/Amireuxxf.github.io.git'
+    branch: main
+  - type: baidu_url_submitter
+
+search:
+  path: search.xml
+  field: post
+  format: html
+  limit: 10000
+
+# 站点地图
+sitemap:
+  path: sitemap.xml
+baidusitemap:
+  path: baidusitemap.xml
+
+# 主动推送百度，被百度收录
+baidu_url_submit:
+  count: 10 # 提交最新的10个链接
+  host: https://amireuxxf.github.io # 百度站长平台中注册的域名
+  token: 3MmYLrMZCnIskmfy # 秘钥，百度站长平台 > 推送接口 > 接口调用地址中token字段
+  path: baidu_urls.txt # 文本文档的地址， 新链接会保存在此文本文档里，不用改
+
+nofollow:
+  enable: true
+  field: site
+  exclude: ''
