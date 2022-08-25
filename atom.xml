@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>赵小航的个人博客</title>
+  
+  
+  <link href="https://amireuxxf.github.io/atom.xml" rel="self"/>
+  
+  <link href="https://amireuxxf.github.io/"/>
+  <updated>2022-08-25T09:29:52.501Z</updated>
+  <id>https://amireuxxf.github.io/</id>
+  
+  <author>
+    <name>赵小航</name>
+    
+  </author>
+  
+  <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Java知识点-SE篇</title>
+    <link href="https://amireuxxf.github.io/posts/9b28f329/"/>
+    <id>https://amireuxxf.github.io/posts/9b28f329/</id>
+    <published>2022-08-22T04:05:56.000Z</published>
+    <updated>2022-08-25T09:29:52.501Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="面向对象特性？"><a href="#面向对象特性？" class="headerlink" title="面向对象特性？"></a>面向对象特性？</h1><ul><li><p><strong>封装</strong></p><p>利用抽象数据类型将数据和基于数据的操作封装在一起，使其构成一个不可分割的独立实体。数据被保护在抽象数据类型的内部，尽可能地隐藏内部的细节，只保留一些对外接口使之与外部发生联系。用户无需知道对象内部的细节，但可以通过对象对外提供的接口来访问该对象。</p><p>优点:</p><ul><li><p>减少耦合: 可以独立地开发、测试、优化、使用、理解和修改</p></li><li><p>减轻维护的负担: 可以更容易被程序员理解，并且在调试的时候可以不影响其他模块</p></li><li><p>有效地调节性能: 可以通过剖析确定哪些模块影响了系统的性能</p></li><li><p>提高软件的可重用性</p></li><li><p>降低了构建大型系统的风险: 即使整个系统不可用，但是这些独立的模块却有可能是可用的</p></li><li><p><strong>继承</strong></p></li></ul><p>继承实现了  <strong>IS-A</strong>  关系，例如 Cat 和 Animal 就是一种 IS-A 关系，因此 Cat 可以继承自 Animal，从而获得 Animal 非 private 的属性和方法。</p><p>继承应该遵循里氏替换原则，子类对象必须能够替换掉所有父类对象。</p><ul><li><strong>多态</strong></li></ul><p>多态分为编译时多态和运行时多态:</p><ul><li>编译时多态主要指方法的重载</li><li>运行时多态指程序中定义的对象引用所指向的具体类型在运行期间才确定</li></ul><p>运行时多态有三个条件:</p><ul><li>继承</li><li>覆盖(重写)</li><li>向上转型</li></ul></li></ul><h1 id="对equals-和hashCode-的理解"><a href="#对equals-和hashCode-的理解" class="headerlink" title="对equals()和hashCode()的理解?"></a>对equals()和hashCode()的理解?</h1><ul><li><strong>为什么在重写 equals 方法的时候需要重写 hashCode 方法</strong>?</li></ul><p>因为有强制的规范指定需要同时重写 hashcode 与 equals 是方法，许多容器类，如 HashMap、HashSet 都依赖于 hashcode 与 equals 的规定。</p><ul><li><strong>有没有可能两个不相等的对象有相同的 hashcode</strong>?</li></ul><p>有可能，两个不相等的对象可能会有相同的 hashcode 值，这就是为什么在 hashmap 中会有冲突。相等 hashcode 值的规定只是说如果两个对象相等，必须有相同的hashcode 值，但是没有关于不相等对象的任何规定。</p><ul><li><strong>两个相同的对象会有不同的 hash code 吗</strong>?</li></ul><p>不能，根据 hash code 的规定，这是不可能的。</p><h1 id="final、finalize-和-finally-的不同之处"><a href="#final、finalize-和-finally-的不同之处" class="headerlink" title="final、finalize 和 finally 的不同之处?"></a>final、finalize 和 finally 的不同之处?</h1><ul><li>final 是一个修饰符，可以修饰变量、方法和类。如果 final 修饰变量，意味着该变量的值在初始化后不能被改变。</li><li>Java 技术允许使用 finalize() 方法在垃圾收集器将对象从内存中清除出去之前做必要的清理工作。这个方法是由垃圾收集器在确定这个对象没有被引用时对这个对象调用的，但是什么时候调用 finalize 没有保证。</li><li>finally 是一个关键字，与 try 和 catch 一起用于异常的处理。finally 块一定会被执行，无论在 try 块中是否有发生异常。</li></ul><h1 id="String、StringBuffer与StringBuilder的区别？"><a href="#String、StringBuffer与StringBuilder的区别？" class="headerlink" title="String、StringBuffer与StringBuilder的区别？"></a>String、StringBuffer与StringBuilder的区别？</h1><p>第一点: 可变和适用范围。String对象是不可变的，而StringBuffer和StringBuilder是可变字符序列。每次对String的操作相当于生成一个新的String对象，而对StringBuffer和StringBuilder的操作是对对象本身的操作，而不会生成新的对象，所以对于频繁改变内容的字符串避免使用String，因为频繁的生成对象将会对系统性能产生影响。</p><p>第二点: 线程安全。String由于有final修饰，是immutable的，安全性是简单而纯粹的。StringBuilder和StringBuffer的区别在于StringBuilder不保证同步，也就是说如果需要线程安全需要使用StringBuffer，不需要同步的StringBuilder效率更高。</p><h1 id="接口与抽象类的区别？"><a href="#接口与抽象类的区别？" class="headerlink" title="接口与抽象类的区别？"></a>接口与抽象类的区别？</h1><ul><li>一个子类只能继承一个抽象类, 但能实现多个接口</li><li>抽象类可以有构造方法, 接口没有构造方法</li><li>抽象类可以有普通成员变量, 接口没有普通成员变量</li><li>抽象类和接口都可有静态成员变量, 抽象类中静态成员变量访问类型任意，接口只能public static final(默认)</li><li>抽象类可以没有抽象方法, 抽象类可以有普通方法；接口在JDK8之前都是抽象方法，在JDK8可以有default方法，在JDK9中允许有私有普通方法</li><li>抽象类可以有静态方法；接口在JDK8之前不能有静态方法，在JDK8中可以有静态方法，且只能被接口类直接调用（不能被实现类的对象调用）</li><li>抽象类中的方法可以是public、protected; 接口方法在JDK8之前只有public abstract，在JDK8可以有default方法，在JDK9中允许有private方法</li></ul><h1 id="this-amp-super-在构造方法中的区别？"><a href="#this-amp-super-在构造方法中的区别？" class="headerlink" title="this() &amp; super()在构造方法中的区别？"></a>this() &amp; super()在构造方法中的区别？</h1><ul><li>调用super()必须写在子类构造方法的第一行, 否则编译不通过</li><li>super从子类调用父类构造, this在同一类中调用其他构造均需要放在第一行</li><li>尽管可以用this调用一个构造器, 却不能调用2个</li><li>this和super不能出现在同一个构造器中, 否则编译不通过</li><li>this()、super()都指的对象,不可以在static环境中使用</li><li>本质this指向本对象的指针。super是一个关键字</li></ul>]]></content>
+    
+    
+    <summary type="html">知识点整理</summary>
+    
+    
+    
+    
+    <category term="信息技术" scheme="https://amireuxxf.github.io/tags/%E4%BF%A1%E6%81%AF%E6%8A%80%E6%9C%AF/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>我拒绝向岁月祈求</title>
+    <link href="https://amireuxxf.github.io/posts/ddfda2a8/"/>
+    <id>https://amireuxxf.github.io/posts/ddfda2a8/</id>
+    <published>2022-08-20T09:03:59.000Z</published>
+    <updated>2022-08-24T10:07:21.026Z</updated>
+    
+    <content type="html"><![CDATA[<p>行走于世间，接纳或拒绝，爱或不爱，放弃或执著…… 每个人都应有接纳与宽容之心，但也要学会拒绝。 </p><p>我拒绝麻木。虽然生活的磨砺让太多的热情化做烟云，但不能让感情磨出老茧。如果没有云让眼神放飞追逐，那么生还有什么乐趣？ </p><p>我拒绝永远明媚的日子。因为那是虚幻的梦境，痛苦可以让我成长、让我坚强。生活中的阴雨与风雪使我能清醒地在春梦中看清脚下的路。</p><p>我拒绝折下那朵盛开的小花，那是在毁灭美的生命。一枝脆弱的纤细花茎，经过多少挣扎与痛苦才盛开出美丽，怎忍心为个人的私欲而去毁灭别人的幸福。我只求远远地望着，默默祈祷那自然的奇迹开遍人生的每个角落。</p><p>我拒绝用青春去赌明天。那弥足珍贵的季节，怎能经得起一掷千金，千金可以收回，但无论是一小时、一分钟……失去了便无处可寻了。青春属于自己，把握它，运用它，珍惜它，才能收获金秋的硕果。 </p><p>我拒绝成为那窗台上惧怕风雨的温柔花，它们只能隔着玻璃窗，感叹多变的天气。有朝一日，有风从虚掩的窗户掠过，那娇弱的花朵便瓣瓣凋零，落一地遗憾和伤心。 </p><p>我欣赏那些与男人并肩的女性，凭自己的聪慧和魅力，得到世界的尊重和生活的地位。我欣赏那有几分豪气的女人，靠自己的双肩挑起生活重担，出得厅堂，下得厨房，卷起袖子能杀鸡宰羊，却也有万缕柔肠能营造一片温馨。 </p><p>我拒绝生活中的痛苦，虽然我无力去阻挡要降临的事。 </p><p>曾听过一个故事：有人去找禅师求得解脱痛苦的方法，禅师让他自己去悟。第一天，禅师问他悟到什么，他不知，便举起戒尺打他一下。<br>第二天，禅师又问，他仍不知，禅师举起戒尺又打了他一下。第三天他仍然没有收获，当禅师举手要打时，他却挡住了。于是禅师笑道：“你终于悟出了这道理——拒绝痛苦。”</p><p>我拒绝为满足虚荣、得到金钱与地位而不惜以青春、美丽甚至感情为祭品。人生中充满诱惑，也同样遍布着歧途与陷阱，女人的美丽是自然的恩赐，是真、善、美的化身，宛如一块无瑕的美玉，决不能被世俗污染，女人要靠自己的能力与才智取得应有的地位和尊重。</p><p>我拒绝倾听罗密欧与朱丽叶式的故事。虽然他们爱得壮烈，但终究是悲剧的结局。我只求现实中的爱有一点浪漫，有几缕微风，有短暂的雷雨也无妨，始终是平淡而幸福的喜剧。</p><p>我拒绝向岁月祈求，流着泪埋怨时光的无情。</p><p>虽然，青春已无声地在日历中一页页翻飞不见了，生活已把经历写在我的眼角，染白长长的青丝，但我相信女人的青春在于她的心境。美丽易逝，魅力永存。 </p><p>我拒绝目的明确的爱情。爱是无法用语言说明的，一段让人辗转难眠、牵肠挂肚、见面时又相对无言的情感遭遇，经过多少欢笑与泪水、缠绵与零落，只为表达一个难以启齿的字——爱。我喜欢平静地望着爱人眼中的自己，微笑着面对幸福，不言不语，携手同行。 </p><p>我拒绝被爱炙伤，拒绝让激情疯狂燃烧后，苍白的灰烬被失望的冬季耗尽青春的余温。</p><p>拒绝肤浅，接纳深沉。拒绝憎恶，接纳宽容、关怀和容忍。拒绝虚伪，接纳真诚。拒绝假、恶、丑，接纳真、善、美…… </p><p>生活中，一条充满诱惑的大路在脚下延伸着，只有学会拒绝才不会步入歧途。</p>]]></content>
+    
+    
+    <summary type="html">好文分享</summary>
+    
+    
+    
+    
+    <category term="文章" scheme="https://amireuxxf.github.io/tags/%E6%96%87%E7%AB%A0/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Hello World</title>
+    <link href="https://amireuxxf.github.io/posts/4a17b156/"/>
+    <id>https://amireuxxf.github.io/posts/4a17b156/</id>
+    <published>2022-08-19T12:07:01.882Z</published>
+    <updated>2022-08-24T10:06:22.608Z</updated>
+    
+    <content type="html"><![CDATA[<p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p><h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/writing.html">Writing</a></p><h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/server.html">Server</a></p><h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/generating.html">Generating</a></p><h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;p&gt;Welcome to &lt;a href=&quot;https://hexo.io/&quot;&gt;Hexo&lt;/a&gt;! This is your very first post. Check &lt;a href=&quot;https://hexo.io/docs/&quot;&gt;documentation&lt;/a&gt; for</summary>
+      
+    
+    
+    
+    
+  </entry>
+  
+</feed>
