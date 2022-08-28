@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
-  <title>赵小航的个人博客</title>
+  <title>赵小航</title>
   
-  
+  <subtitle>时光停滞,岁月静好</subtitle>
   <link href="https://amireuxxf.github.io/atom.xml" rel="self"/>
   
   <link href="https://amireuxxf.github.io/"/>
