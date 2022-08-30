@@ -2,6 +2,33 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://amireuxxf.github.io/gallery/%E6%98%8E%E6%98%9F/index.html</loc>
+    
+    <lastmod>2022-08-30</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://amireuxxf.github.io/gallery/%E5%A3%81%E7%BA%B8/index.html</loc>
+    
+    <lastmod>2022-08-30</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://amireuxxf.github.io/gallery/index.html</loc>
+    
+    <lastmod>2022-08-30</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://amireuxxf.github.io/posts/ddfda2a8/</loc>
     
     <lastmod>2022-08-30</lastmod>
@@ -48,15 +75,6 @@
   
   <url>
     <loc>https://amireuxxf.github.io/categories/index.html</loc>
-    
-    <lastmod>2022-08-30</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://amireuxxf.github.io/gallery/index.html</loc>
     
     <lastmod>2022-08-30</lastmod>
     
