@@ -6,7 +6,7 @@
   <link href="https://amireuxxf.github.io/atom.xml" rel="self"/>
   
   <link href="https://amireuxxf.github.io/"/>
-  <updated>2022-09-05T14:33:09.944Z</updated>
+  <updated>2022-09-14T11:03:41.325Z</updated>
   <id>https://amireuxxf.github.io/</id>
   
   <author>
@@ -15,6 +15,25 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Tomcat端口被占用</title>
+    <link href="https://amireuxxf.github.io/posts/7d637b24/"/>
+    <id>https://amireuxxf.github.io/posts/7d637b24/</id>
+    <published>2022-09-14T07:42:37.000Z</published>
+    <updated>2022-09-14T11:03:41.325Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="Tomcat启动"><a href="#Tomcat启动" class="headerlink" title="Tomcat启动"></a>Tomcat启动</h2><p>&emsp;&emsp;在启动Tomcat是出现了端口1099被占用的问题，重启以及重新配置Tomcat都无法解决问题。</p><p>&emsp;&emsp;报错信息：localhost：1099 is already used</p><h2 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h2><h3 id="方案一：查找占用1099端口的进程并结束"><a href="#方案一：查找占用1099端口的进程并结束" class="headerlink" title="方案一：查找占用1099端口的进程并结束"></a>方案一：查找占用1099端口的进程并结束</h3><p>&emsp;&emsp;运行cmd，分别输入以下代码，重启Tomcat。</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"># 查找所有端口为1099的进程</span><br><span class="line">netstat -ano | findstr 1099</span><br><span class="line"># 结束端口为1099的进程</span><br><span class="line">taskkill -f -pid 1099端口进程所对应的pid</span><br></pre></td></tr></table></figure><h3 id="方案二：关闭Java-exe进程"><a href="#方案二：关闭Java-exe进程" class="headerlink" title="方案二：关闭Java.exe进程"></a>方案二：关闭Java.exe进程</h3><p>&emsp;&emsp;1、打开任务管理器（ctrl+shift+esc）,选择进程</p><p>&emsp;&emsp;2、找到所有的Java.exe进程，然后关闭</p><p>&emsp;&emsp;3、找到JDK安装目录，进入bin目录下，双击java.exe文件运行</p><p>&emsp;&emsp;4、重新启动idea</p><h3 id="方案三：关闭Hyper-v"><a href="#方案三：关闭Hyper-v" class="headerlink" title="方案三：关闭Hyper-v"></a>方案三：关闭Hyper-v</h3><p>&emsp;&emsp;可能我们电脑开启了Hyper-V服务，系统默认会分配给一些保留端口供Hyper-V使用，可能与Tomcat冲突。</p><p>&emsp;&emsp;首先我们可以查看一下我们系统默认的端口占用范围：</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"> # 查看系统默认的端口占用范围</span><br><span class="line">netsh int ipv4 show dynamicport tcp</span><br></pre></td></tr></table></figure><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">协议 tcp 动态端口范围</span><br><span class="line">---------------------------------</span><br><span class="line">启动端口        : 1024</span><br><span class="line">端口数          : 13977</span><br></pre></td></tr></table></figure><p>&emsp;&emsp;可以看到Windows系统默认的tcp动态端口范围为：1024~13977</p><p>&emsp;&emsp;当开启Hyper-V后，系统默认会分配给一些保留端口供Hyper-V使用</p><p>&emsp;&emsp;IDEA运行Tomcat需要JMX的1099端口刚好在端口排除范围中，这样就导致了IDEA需要使用1099端口是会被占用</p><p>&emsp;&emsp;<strong>解决方案</strong>：控制面板-&gt;程序-&gt;程序和功能-&gt;Windows功能，去掉Hyper-V前边的勾选框</p><p><img src="/img/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20220914183905.jpg"></p><p>&emsp;&emsp;此电脑右键-&gt;管理-&gt;服务和应用程序-&gt;服务</p><p>&emsp;&emsp;将Hyper相关服务全部停止并设置为手动类型。然后重启电脑即可</p><p><img src="/img/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20220914190309.jpg"></p><h3 id="方案四：cmd命令修改端口范围"><a href="#方案四：cmd命令修改端口范围" class="headerlink" title="方案四：cmd命令修改端口范围"></a>方案四：cmd命令修改端口范围</h3><p>&emsp;&emsp;前提是Windows系统默认的tcp动态端口范围为：1024~13977，关闭Hyper-V后也不能用</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"> # 使用命令修改配置，重启Tomcat</span><br><span class="line">netsh int ipv4 set dynamicportrange tcp start=49152 num=16384</span><br></pre></td></tr></table></figure><h3 id="方案五：重建Tomcat"><a href="#方案五：重建Tomcat" class="headerlink" title="方案五：重建Tomcat"></a>方案五：重建Tomcat</h3><p>&emsp;&emsp;将Tomcat删除，重新建立运行。</p><h3 id="方案六：重置winsock目录"><a href="#方案六：重置winsock目录" class="headerlink" title="方案六：重置winsock目录"></a>方案六：重置winsock目录</h3><p>&emsp;&emsp;Netsh winsock reset是一个命令提示程序，用于将winsock目录重置为默认设置或清除状态。如有时候上不了网或者网络出现问题经常用到它，简单地理解就是：重置程序通过操作系统链接网络的入口点。</p><p>&emsp;&emsp;以管理员身份运行cmd，然后重启计算机 </p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">netsh winsock reset</span><br></pre></td></tr></table></figure><h3 id="方案七：查看host"><a href="#方案七：查看host" class="headerlink" title="方案七：查看host"></a>方案七：查看host</h3><p>&emsp;&emsp;在SwtichHosts中查看是否少了 127.0.0.1 localhost这行，如果少了就再单独配置一行，启动项目。</p>]]></content>
+    
+    
+    <summary type="html">Tomcat启动报错</summary>
+    
+    
+    
+    
+    <category term="Tomcat" scheme="https://amireuxxf.github.io/tags/Tomcat/"/>
+    
+  </entry>
   
   <entry>
     <title>MarkDown基本语法</title>
@@ -59,9 +78,9 @@
     <link href="https://amireuxxf.github.io/posts/a60727c/"/>
     <id>https://amireuxxf.github.io/posts/a60727c/</id>
     <published>2022-08-30T13:22:26.000Z</published>
-    <updated>2022-09-06T12:14:17.513Z</updated>
+    <updated>2022-09-14T07:48:58.155Z</updated>
     
-    <content type="html"><![CDATA[<h4 id="个人简介"><a href="#个人简介" class="headerlink" title="个人简介"></a>个人简介</h4><p>&emsp;&emsp;Hello,你好呀！我是程序员赵小航，是一名刚入行的程序员小白。熟悉HTML，CSS，JavaScript以及TypeScript等编程语言，目前正在系统的进行Java后端方向的学习，目标是成为全栈开发工程师，快来和我一起交流学习，共同进步吧！</p><h4 id="GitHub"><a href="#GitHub" class="headerlink" title="GitHub:"></a>GitHub:</h4><p>&emsp;&emsp;<a href="https://github.com/Amireuxxf">https://github.com/Amireuxxf</a></p><h4 id="Gitee"><a href="#Gitee" class="headerlink" title="Gitee:"></a>Gitee:</h4><p>&emsp;&emsp;<a href="https://gitee.com/Amireuxxf">https://gitee.com/Amireuxxf</a></p><h4 id="MyBlog"><a href="#MyBlog" class="headerlink" title="MyBlog:"></a>MyBlog:</h4><p>&emsp;&emsp;<a href="https://amireuxxf.cn/">https://amireuxxf.cn</a></p>]]></content>
+    <content type="html"><![CDATA[<h4 id="个人简介"><a href="#个人简介" class="headerlink" title="个人简介"></a>个人简介</h4><p>&emsp;&emsp;Hello,你好呀！我是一名刚入行的程序员小白。熟悉HTML，CSS，JavaScript以及TypeScript等编程语言，目前正在系统的进行Java后端方向的学习，目标是成为全栈开发工程师，快来和我一起交流学习，共同进步吧！</p><h4 id="GitHub"><a href="#GitHub" class="headerlink" title="GitHub:"></a>GitHub:</h4><p>&emsp;&emsp;<a href="https://github.com/Amireuxxf">https://github.com/Amireuxxf</a></p><h4 id="Gitee"><a href="#Gitee" class="headerlink" title="Gitee:"></a>Gitee:</h4><p>&emsp;&emsp;<a href="https://gitee.com/Amireuxxf">https://gitee.com/Amireuxxf</a></p><h4 id="MyBlog"><a href="#MyBlog" class="headerlink" title="MyBlog:"></a>MyBlog:</h4><p>&emsp;&emsp;<a href="https://amireuxxf.cn/">https://amireuxxf.cn</a></p>]]></content>
     
     
     <summary type="html">个人简介</summary>
